@@ -41,7 +41,7 @@ export default function Home() {
 
       // Fetch Barberos
       try {
-        const bRes = await api.get('/barberos');
+        const bRes = await api.get('/equipo');
         setBarberos(bRes.data || []);
       } catch (err) {
         console.error("Error fetching barberos:", err);
