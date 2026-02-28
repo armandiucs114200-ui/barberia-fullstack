@@ -4,7 +4,7 @@ const getBarberos = async (req, res, next) => {
     try {
         const { data, error } = await supabase
             .from('barberos')
-            .select('id, nombre, especialidad, experiencia_anios, url_imagen')
+            .select('id, nombre, especialidad, foto_url')
             .order('nombre', { ascending: true });
 
         if (error) throw error;

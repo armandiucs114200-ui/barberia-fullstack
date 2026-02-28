@@ -30,7 +30,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(userData));
             setUser(userData);
 
-            router.push('/dashboard');
+            // Redirect to admin panel if staff, else home
+            router.push(userData.role === 'admin' ? '/admin' : '/');
             return { success: true };
         } catch (error) {
             return {
