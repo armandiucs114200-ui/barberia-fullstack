@@ -9,8 +9,11 @@ const { validatePagination } = require('../middleware/validationMiddleware');
 // Get reservations (paginated)
 router.get('/', authMiddleware, validatePagination, getReservas);
 
-// Create reservation
+// Create reservation (Auth required)
 router.post('/', authMiddleware, createReserva);
+
+// Create Public reservation (No Auth required)
+router.post('/public', createPublicReserva);
 
 // Update reservation status (Admin Only)
 router.patch('/:id/estado', authMiddleware, roleMiddleware(['admin']), updateReservaEstado);

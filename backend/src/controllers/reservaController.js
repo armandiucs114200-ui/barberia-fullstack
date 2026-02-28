@@ -101,4 +101,38 @@ const updateReservaEstado = async (req, res, next) => {
     }
 };
 
-module.exports = { getReservas, createReserva, updateReservaEstado };
+const createPublicReserva = async (req, res, next) => {
+    try {
+        const { fecha, hora, barbero_id, servicio, cliente_nombre, cliente_telefono } = req.body;
+
+        if (!fecha || !hora || !barbero_id || !servicio || !cliente_nombre || !cliente_telefono) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios: fecha, hora, barbero_id, servicio, cliente_nombre, cliente_telefono' });
+        }
+
+        const { data, error } = await supabase
+            .from('reservas')
+            .insert([
+                {
+                    fecha,
+                    hora,
+                    barbero_id,
+                    servicio,
+                    cliente_nombre,
+                    cliente_telefono,
+                    estado: 'pendiente'
+                }
+            ])
+            .select('*')
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        res.status(201).json({ message: 'Reserva pública creada exitosamente', data });
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { getReservas, createReserva, updateReservaEstado, createPublicReserva };

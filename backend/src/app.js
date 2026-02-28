@@ -14,10 +14,12 @@ app.use(express.json());
 const authRoutes = require('./routes/authRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
 const barberoRoutes = require('./routes/barberoRoutes');
+const weatherRoutes = require('./routes/weatherRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/reservas', reservaRoutes);
 app.use('/api/barberos', barberoRoutes);
+app.use('/api/weather', weatherRoutes);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Barber Shop API is running' });

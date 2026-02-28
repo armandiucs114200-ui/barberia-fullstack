@@ -100,8 +100,9 @@ export default function AdminDashboard() {
     };
 
     const handleWhatsApp = (reserva) => {
-        const telefono = '5215555555555'; // Teléfono placeholder. Supabase debería tener cliente_telefono
-        const mensaje = `Hola, confirmamos tu cita para el día ${reserva.fecha.split('T')[0]} a las ${reserva.hora?.substring(0, 5) || ''} en Crimson Blades. ¡Te esperamos!`;
+        const telefono = reserva.cliente_telefono?.replace(/\s+/g, '') || '';
+        const nombreCliente = reserva.cliente_nombre || 'Cliente';
+        const mensaje = `Hola ${nombreCliente}, confirmamos tu cita para el día ${reserva.fecha.split('T')[0]} a las ${reserva.hora?.substring(0, 5) || ''} en Crimson Blades. ¡Te esperamos!`;
         const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
         toast('Redirigiendo a WhatsApp...', { icon: '💬' });
