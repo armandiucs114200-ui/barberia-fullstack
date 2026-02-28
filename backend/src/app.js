@@ -21,6 +21,14 @@ app.use('/api/reservas', reservaRoutes);
 app.use('/api/equipo', barberoRoutes);
 app.use('/api/weather', weatherRoutes);
 
+app.get('/api/status-check', (req, res) => {
+    res.json({
+        message: 'Backend is up to date',
+        deployed_at: '2026-02-28 11:15',
+        version: 'v3-equipo'
+    });
+});
+
 app.get('/', (req, res) => {
     res.json({ message: 'Barber Shop API is running' });
 });
