@@ -71,4 +71,34 @@ const createReserva = async (req, res, next) => {
     }
 };
 
-module.exports = { getReservas, createReserva };
+const updateReservaEstado = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        if (!['pendiente', 'completada', 'cancelada'].includes(estado)) {
+            return res.status(400).json({ error: 'Estado inválido. Debe ser pendiente, completada o cancelada' });
+        }
+
+        const { data, error } = await supabase
+            .from('reservas')
+            .update({ estado })
+            .eq('id', id)
+            .select('*')
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        if (!data) {
+            return res.status(404).json({ error: 'Reserva no encontrada' });
+        }
+
+        res.json({ message: 'Estado de reserva actualizado', data });
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { getReservas, createReserva, updateReservaEstado };

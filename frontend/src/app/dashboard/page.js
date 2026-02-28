@@ -16,8 +16,12 @@ export default function Dashboard() {
     const router = useRouter();
 
     useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/login');
+        if (!authLoading) {
+            if (!user) {
+                router.push('/login');
+            } else if (user.role === 'admin') {
+                router.push('/admin');
+            }
         }
     }, [user, authLoading, router]);
 

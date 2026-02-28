@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getReservas, createReserva } = require('../controllers/reservaController');
+const { getReservas, createReserva, updateReservaEstado } = require('../controllers/reservaController');
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
 
@@ -11,6 +11,9 @@ router.get('/', authMiddleware, validatePagination, getReservas);
 
 // Create reservation
 router.post('/', authMiddleware, createReserva);
+
+// Update reservation status (Admin Only)
+router.patch('/:id/estado', authMiddleware, roleMiddleware(['admin']), updateReservaEstado);
 
 // Example of admin only route
 router.post('/admin-only', authMiddleware, roleMiddleware(['admin']), (req, res) => {

@@ -45,7 +45,7 @@ export default function ReservarPage() {
         const fetchBarberos = async () => {
             try {
                 const response = await api.get('/barberos');
-                setBarberos(response.data.data);
+                setBarberos(response.data);
             } catch (err) {
                 console.error('Error fetching barberos:', err);
                 setError('No se pudieron cargar los barberos.');
