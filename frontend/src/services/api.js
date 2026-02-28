@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://barber-cgfw.onrender.com/api',
+    baseURL: 'https://barber-cgfw.onrender.com/api',
 });
 
 // Interceptor to add token to requests
