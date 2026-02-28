@@ -147,7 +147,7 @@ export default function Home() {
                 <div className="hidden sm:flex items-center gap-2 bg-black/40 border border-gray-800 px-4 py-2 rounded-xl">
                   <img src={weather.icon} alt="climate" className="w-6 h-6" />
                   <div>
-                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none">Madrid</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none">Chihuahua</p>
                     <p className="text-sm font-black text-gray-300 leading-tight">{weather.avg_temp}°C</p>
                   </div>
                 </div>
