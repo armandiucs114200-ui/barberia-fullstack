@@ -18,7 +18,7 @@ const weatherRoutes = require('./routes/weatherRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/reservas', reservaRoutes);
-app.use('/api/barberos', barberoRoutes);
+app.use('/api/equipo', barberoRoutes);
 app.use('/api/weather', weatherRoutes);
 
 app.get('/', (req, res) => {
