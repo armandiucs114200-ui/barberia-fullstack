@@ -45,7 +45,7 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         if (!authLoading && (!user || user.role !== 'admin')) {
-            router.push('/dashboard');
+            router.push('/');
             return;
         }
 
