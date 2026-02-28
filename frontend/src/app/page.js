@@ -31,16 +31,20 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPublicData = async () => {
+      // Fetch Weather
       try {
-        // Fetch Weather
         const wRes = await api.get('/weather/current');
         if (wRes.data) setWeather(wRes.data);
+      } catch (err) {
+        console.warn("Weather widget unavailable:", err.message);
+      }
 
-        // Fetch Barberos
+      // Fetch Barberos
+      try {
         const bRes = await api.get('/barberos');
         setBarberos(bRes.data || []);
       } catch (err) {
-        console.error("Error fetching public data:", err);
+        console.error("Error fetching barberos:", err);
       }
     };
 
