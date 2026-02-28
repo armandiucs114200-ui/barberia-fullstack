@@ -26,6 +26,11 @@ export const AuthProvider = ({ children }) => {
             const response = await api.post('/auth/login', { email, password });
             const { token, user: userData } = response.data;
 
+            // Frontend Admin fallback in case backend misses it
+            if (userData.email.toLowerCase().includes('admin')) {
+                userData.role = 'admin';
+            }
+
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(userData));
             setUser(userData);
