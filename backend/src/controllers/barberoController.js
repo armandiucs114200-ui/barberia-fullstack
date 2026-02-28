@@ -1,5 +1,4 @@
 const supabase = require('../config/supabase');
-// Fixed: Removed missing experiencia_anios column to prevent 500 error on Render
 
 const getBarberos = async (req, res, next) => {
     try {
