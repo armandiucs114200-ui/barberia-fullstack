@@ -80,17 +80,17 @@
             "name": "Barberos",
             "item": [
                 {
-                    "name": "Get Barberos",
+                    "name": "Get Equipo (Barberos)",
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "{{BASE_URL}}/api/barberos",
+                            "raw": "{{BASE_URL}}/api/equipo",
                             "host": [
                                 "{{BASE_URL}}"
                             ],
                             "path": [
                                 "api",
-                                "barberos"
+                                "equipo"
                             ]
                         }
                     },
@@ -102,7 +102,7 @@
     "variable": [
         {
             "key": "BASE_URL",
-            "value": "http://localhost:4000"
+            "value": "https://barber-cgfw.onrender.com"
         }
     ]
 }
