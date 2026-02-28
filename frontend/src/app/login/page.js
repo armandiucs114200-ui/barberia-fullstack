@@ -24,43 +24,61 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
-            <div className="max-w-md w-full space-y-8 bg-gray-800 p-8 rounded-xl shadow-2xl">
-                <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-extrabold text-white">Barbería Axial Flare</h2>
-                    <p className="mt-2 text-sm text-gray-400">Inicia sesión en tu cuenta</p>
+        <div className="min-h-screen flex items-center justify-center bg-background px-4">
+            <div className="w-full max-w-md p-8 bg-card/95 backdrop-blur-md rounded-2xl shadow-2xl border border-red-900/30 relative overflow-hidden">
+                {/* Decoración roja */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-700 via-red-500 to-red-900"></div>
+
+                <div className="text-center mb-8">
+                    <h2 className="mt-2 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 uppercase tracking-wider">
+                        Barbería Axial Flare
+                    </h2>
+                    <p className="mt-2 text-sm text-gray-400 font-medium tracking-widest uppercase">
+                        Inicia sesión en tu cuenta
+                    </p>
                 </div>
 
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     {error && (
-                        <div className="bg-red-900/50 border border-red-500 text-red-100 px-4 py-3 rounded-lg flex items-center gap-3">
+                        <div className="mb-6 p-4 text-sm text-red-200 bg-red-900/50 rounded-lg border border-red-800 flex items-center gap-3">
                             <AlertCircle size={20} />
-                            <span className="text-sm">{error}</span>
+                            <span className="font-bold">Acceso Denegado: </span> {error}
                         </div>
                     )}
 
-                    <div className="rounded-md shadow-sm space-y-4">
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                            <input
-                                type="email"
-                                required
-                                className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Correo electrónico"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-1">
+                                Correo del Acceso
+                            </label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                                <input
+                                    type="email"
+                                    required
+                                    className="w-full py-3 pl-10 pr-4 text-white bg-black/50 border border-gray-600/50 rounded-xl focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all placeholder-gray-600"
+                                    placeholder="admin@barberia.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
                         </div>
-                        <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                            <input
-                                type="password"
-                                required
-                                className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Contraseña"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-1">
+                                Contraseña
+                            </label>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                                <input
+                                    type="password"
+                                    required
+                                    className="w-full py-3 pl-10 pr-4 text-white bg-black/50 border border-gray-600/50 rounded-xl focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all placeholder-gray-600"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -68,7 +86,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50"
+                            className="w-full px-4 py-3 text-sm font-bold text-white transition-all duration-300 bg-red-600 rounded-xl hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 hover:shadow-[0_0_15px_rgba(220,38,38,0.5)] uppercase tracking-wider"
                         >
                             {loading ? 'Iniciando sesión...' : 'Entrar'}
                         </button>

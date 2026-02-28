@@ -41,38 +41,40 @@ export default function Dashboard() {
 
     if (authLoading || !user) {
         return (
-            <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">
+            <div className="min-h-screen bg-background flex items-center justify-center text-white">
                 Cargando...
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
+        <div className="min-h-screen bg-background text-white p-4 md:p-8">
             <div className="max-w-4xl mx-auto">
-                <header className="flex justify-between items-center mb-10">
+                <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold">Mis Reservas</h1>
-                        <p className="text-gray-400">Bienvenido de nuevo, {user.email}</p>
+                        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 uppercase tracking-widest">
+                            Mis Reservas
+                        </h1>
+                        <p className="text-gray-400 mt-1 uppercase text-xs tracking-wider">Cliente: <span className="text-white">{user.email}</span></p>
                     </div>
                     <div className="flex gap-4">
                         {user.role === 'usuario' && (
                             <Link
                                 href="/reservar"
-                                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm text-white font-medium transition-colors"
+                                className="flex items-center gap-2 bg-red-600 hover:bg-red-500 px-4 py-2 rounded-xl text-sm text-white font-bold transition-all uppercase tracking-wider hover:shadow-[0_0_15px_rgba(220,38,38,0.5)]"
                             >
                                 Nueva Reserva
                             </Link>
                         )}
                         <Link
                             href="/barberos"
-                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm text-white font-medium transition-colors"
+                            className="flex items-center gap-2 bg-black/50 border border-gray-700 hover:border-red-600 px-4 py-2 rounded-xl text-sm text-white font-medium transition-colors uppercase tracking-wider"
                         >
                             Ver Barberos
                         </Link>
                         <button
                             onClick={logout}
-                            className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm border border-gray-700 transition-colors"
+                            className="flex items-center gap-2 bg-black/50 hover:bg-red-900/50 px-4 py-2 rounded-xl text-sm border border-red-900/30 text-gray-300 hover:text-white transition-all uppercase tracking-wider"
                         >
                             <LogOut size={18} /> Salir
                         </button>
@@ -80,16 +82,19 @@ export default function Dashboard() {
                 </header>
 
                 {loading ? (
-                    <div className="text-center py-20 bg-gray-800 rounded-xl">Cargando reservas...</div>
+                    <div className="text-center py-20 bg-card/95 backdrop-blur-md border border-red-900/30 rounded-2xl shadow-xl">Cargando reservas...</div>
                 ) : reservas.length === 0 ? (
-                    <div className="text-center py-20 bg-gray-800 rounded-xl">No tienes reservas pendientes.</div>
+                    <div className="text-center py-20 bg-card/95 backdrop-blur-md border border-red-900/30 rounded-2xl shadow-xl text-gray-400 uppercase tracking-widest text-sm">
+                        No hay reservas pendientes
+                    </div>
                 ) : (
                     <div className="space-y-4">
                         {reservas.map((reserva) => (
-                            <div key={reserva.id} className="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-lg hover:border-blue-500/50 transition-all">
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div key={reserva.id} className="relative overflow-hidden bg-card/95 backdrop-blur-md p-6 rounded-2xl border border-red-900/30 shadow-2xl hover:border-red-500/50 transition-all hover:-translate-y-1">
+                                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-600 to-red-900"></div>
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pl-4">
                                     <div className="space-y-2">
-                                        <div className="flex items-center gap-2 text-blue-400 font-medium">
+                                        <div className="flex items-center gap-2 text-red-500 text-sm font-bold uppercase tracking-wider">
                                             <Calendar size={18} />
                                             <span>{new Date(reserva.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                                         </div>
@@ -100,14 +105,14 @@ export default function Dashboard() {
                                     </div>
 
                                     {reserva.clima && (
-                                        <div className="bg-gray-900/50 p-3 rounded-lg flex items-center gap-4 border border-gray-700/50">
+                                        <div className="bg-black/50 p-3 rounded-xl flex items-center gap-4 border border-gray-800">
                                             <div className="text-right">
-                                                <p className="text-xs text-gray-400 uppercase tracking-wider">Clima previsto</p>
-                                                <p className="font-medium text-sm">{reserva.clima.condition}</p>
+                                                <p className="text-[10px] text-gray-500 uppercase tracking-widest">Clima previsto</p>
+                                                <p className="font-medium text-sm text-gray-300">{reserva.clima.condition}</p>
                                             </div>
-                                            <div className="flex items-center gap-2 bg-blue-500/10 p-2 rounded-full">
-                                                <img src={reserva.clima.icon} alt="clima" className="w-8 h-8" />
-                                                <span className="font-bold text-blue-400">{reserva.clima.avg_temp}°C</span>
+                                            <div className="flex items-center gap-2 bg-red-900/20 px-3 py-1.5 rounded-full border border-red-900/50">
+                                                <img src={reserva.clima.icon} alt="clima" className="w-6 h-6" />
+                                                <span className="font-bold text-red-400">{reserva.clima.avg_temp}°C</span>
                                             </div>
                                         </div>
                                     )}
@@ -124,9 +129,9 @@ export default function Dashboard() {
                             <button
                                 key={i}
                                 onClick={() => setPagination({ ...pagination, page: i + 1 })}
-                                className={`w-10 h-10 rounded-lg font-medium transition-all ${pagination.page === i + 1
-                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
-                                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                className={`w-10 h-10 rounded-xl font-bold transition-all ${pagination.page === i + 1
+                                    ? 'bg-red-600 text-white shadow-[0_0_10px_rgba(220,38,38,0.5)]'
+                                    : 'bg-black/50 text-gray-400 hover:bg-gray-800 border border-gray-700'
                                     }`}
                             >
                                 {i + 1}
