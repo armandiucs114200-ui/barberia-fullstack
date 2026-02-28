@@ -56,6 +56,14 @@ export default function Dashboard() {
                         <p className="text-gray-400">Bienvenido de nuevo, {user.email}</p>
                     </div>
                     <div className="flex gap-4">
+                        {user.role === 'usuario' && (
+                            <Link
+                                href="/reservar"
+                                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm text-white font-medium transition-colors"
+                            >
+                                Nueva Reserva
+                            </Link>
+                        )}
                         <Link
                             href="/barberos"
                             className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm text-white font-medium transition-colors"
@@ -87,7 +95,7 @@ export default function Dashboard() {
                                         </div>
                                         <div className="flex items-center gap-2 text-gray-300">
                                             <Clock size={18} />
-                                            <span>{reserva.hora}</span>
+                                            <span>{reserva.hora.substring(0, 5)} {reserva.servicio ? `- ${reserva.servicio}` : ''}</span>
                                         </div>
                                     </div>
 

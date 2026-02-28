@@ -43,4 +43,32 @@ const getReservas = async (req, res, next) => {
     }
 };
 
-module.exports = { getReservas };
+const createReserva = async (req, res, next) => {
+    try {
+        const { fecha, hora, barbero_id, servicio } = req.body;
+
+        if (!fecha || !hora || !barbero_id || !servicio) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios: fecha, hora, barbero_id, servicio' });
+        }
+
+        const cliente_id = req.user.id;
+
+        const { data, error } = await supabase
+            .from('reservas')
+            .insert([
+                { fecha, hora, barbero_id, cliente_id, servicio, estado: 'pendiente' }
+            ])
+            .select('*')
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        res.status(201).json({ message: 'Reserva creada exitosamente', data });
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { getReservas, createReserva };
