@@ -10,7 +10,7 @@ const getForecast = async (date) => {
 
     // Usando WeatherAPI.com como ejemplo (soporta búsqueda por fecha histórica/futura cercana)
     // Nota: La Barbería está en una ubicación fija (ej: Madrid)
-    const location = process.env.BARBER_LOCATION || 'Madrid';
+    const location = process.env.BARBER_LOCATION || 'Chihuahua';
 
     try {
         const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json`, {
